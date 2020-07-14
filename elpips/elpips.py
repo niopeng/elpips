@@ -300,11 +300,14 @@ class Metric:
 		def body(i, loss_sum):
 			ensemble = self.sample_ensemble(self.config)
 			
-			ensemble_X = for_each(image_in, lambda X: apply_ensemble(self.config, ensemble, X))
-			ensemble_X = for_each(ensemble_X, lambda X: 2.0 * X - 1.0)
+			# ensemble_X = for_each(image_in, lambda X: apply_ensemble(self.config, ensemble, X))
+			# ensemble_X = for_each(ensemble_X, lambda X: 2.0 * X - 1.0)
+			#
+			# ensemble_R = apply_ensemble(self.config, ensemble, reference)
+			# ensemble_R = 2.0 * ensemble_R - 1.0
 
-			ensemble_R = apply_ensemble(self.config, ensemble, reference)			
-			ensemble_R = 2.0 * ensemble_R - 1.0
+			ensemble_X = for_each(image_in, lambda X: 2.0 * X - 1.0)
+			ensemble_R = 2.0 * reference - 1.0
 			
 			loss = self.network.forward(ensemble_X, ensemble_R)
 			loss_sum += tf.stack(loss, axis=0)
