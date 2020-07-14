@@ -73,7 +73,7 @@ class PNetLin(object):
 			
 		elif pnet_type == 'vgg_ensemble':
 			self.net = networks.vgg16_full_avg(use_net_dropout=use_net_dropout, net_dropout_keep_prob=net_dropout_keep_prob, trainable=self.net_trainable, custom_net_weights=custom_net_weights, dtype=dtype)
-			print(a)
+
 			if self.linear_weight_as_dict is None:
 				self.linear_weight_as_dict = np.load(os.path.join(DATA_DIR, "vgg_full_avg.npy"), allow_pickle=True).item()
 		
@@ -154,7 +154,10 @@ class PNetLin(object):
 		'''
 		with tf.name_scope("PNetLin"):
 			in0_sc = for_each(as_tuple(in0), lambda X: (X - self.shift) /  self.scale) # convert in0 to tuple, and shift and scale each element
-			in1_sc = (in1 - self.shift) /  self.scale 
+			in1_sc = (in1 - self.shift) /  self.scale
+
+			print("!!!!!!!!in 0: ", tf.reduce_mean(in0_sc))
+			print("!!!!!!!!in 1: ", tf.reduce_mean(in1_sc))
 			
 			in0_size = len(in0_sc)
 			
@@ -174,6 +177,8 @@ class PNetLin(object):
 			
 			# Evaluate the losses.
 			losses = self._forward_all_linear_activations(tuple(diffs))
+
+			print("!!!!!!!!loss: ", losses)
 			
 			if isinstance(in0, tuple):
 				return losses
