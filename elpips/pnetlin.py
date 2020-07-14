@@ -73,7 +73,7 @@ class PNetLin(object):
 			
 		elif pnet_type == 'vgg_ensemble':
 			self.net = networks.vgg16_full_avg(use_net_dropout=use_net_dropout, net_dropout_keep_prob=net_dropout_keep_prob, trainable=self.net_trainable, custom_net_weights=custom_net_weights, dtype=dtype)
-			
+			print(a)
 			if self.linear_weight_as_dict is None:
 				self.linear_weight_as_dict = np.load(os.path.join(DATA_DIR, "vgg_full_avg.npy"), allow_pickle=True).item()
 		
