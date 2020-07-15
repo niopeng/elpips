@@ -156,8 +156,9 @@ class PNetLin(object):
 			in0_sc = for_each(as_tuple(in0), lambda X: (X - self.shift) /  self.scale) # convert in0 to tuple, and shift and scale each element
 			in1_sc = (in1 - self.shift) /  self.scale
 
-			tf.print("!!!!!!!!in 0: ", tf.reduce_mean(in0_sc), output_stream=sys.stdout)
-			tf.print("!!!!!!!!in 1: ", tf.reduce_mean(in1_sc), output_stream=sys.stdout)
+
+			with tf.Session() as sess: print("!!!!!!!!in 0: ", tf.reduce_mean(in0_sc))
+			with tf.Session() as sess: print("!!!!!!!!in 1: ", tf.reduce_mean(in1_sc))
 			
 			in0_size = len(in0_sc)
 			
@@ -178,7 +179,7 @@ class PNetLin(object):
 			# Evaluate the losses.
 			losses = self._forward_all_linear_activations(tuple(diffs))
 
-			tf.print("!!!!!!!!loss: ", losses, output_stream=sys.stdout)
+			with tf.Session() as sess: print("!!!!!!!!loss: ", losses)
 			
 			if isinstance(in0, tuple):
 				return losses
