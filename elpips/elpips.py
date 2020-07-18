@@ -298,7 +298,7 @@ class Metric:
 			return tf.less(i, tf.cast(self.config.average_over, tf.int32))
 		
 		def body(i, loss_sum):
-			ensemble = self.sample_ensemble(self.config)
+			# ensemble = self.sample_ensemble(self.config)
 			
 			# ensemble_X = for_each(image_in, lambda X: apply_ensemble(self.config, ensemble, X))
 			# ensemble_X = for_each(ensemble_X, lambda X: 2.0 * X - 1.0)

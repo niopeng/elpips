@@ -91,6 +91,7 @@ class PNetLin(object):
 						key: tf.get_variable(key, dtype=tf.float32, initializer=tf.zeros_like(value), trainable=True) for key, value in self.linear_weight_as_dict.items()
 					}
 		else:
+			print(a)
 			self.linear_weight_as_dict = {key: tf.constant(value, dtype=tf.float32) for key, value in self.linear_weight_as_dict.items()}
 		
 		self.shift = tf.constant([-.030, -.088, -.188],shape=(1,1,1,3),dtype=np_dtype(dtype))
@@ -157,9 +158,9 @@ class PNetLin(object):
 			in1_sc = (in1 - self.shift) /  self.scale
 
 			# with tf.Session() as sess: print("!!!!!!!!in 0: ", in0_sc.eval())
-			with tf.Session() as sess:
-				print("!!!!!!!!in 0: ", in0_sc)
-			with tf.Session() as sess: print("!!!!!!!!in 1: ", in1_sc.eval())
+			# with tf.Session() as sess:
+			# 	print("!!!!!!!!in 0: ", in0_sc)
+			# with tf.Session() as sess: print("!!!!!!!!in 1: ", in1_sc.eval())
 			
 			in0_size = len(in0_sc)
 			
@@ -180,7 +181,7 @@ class PNetLin(object):
 			# Evaluate the losses.
 			losses = self._forward_all_linear_activations(tuple(diffs))
 
-			with tf.Session() as sess: print("!!!!!!!!loss: ", losses.eval())
+			# with tf.Session() as sess: print("!!!!!!!!loss: ", losses.eval())
 			
 			if isinstance(in0, tuple):
 				return losses
