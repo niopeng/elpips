@@ -878,6 +878,5 @@ class vgg16_full_avg(Network):
 		o51, o52, o53 = self.get_slice5(o43)
 		vgg_outputs = namedtuple("VggOutputs", ['o11', 'o12', 'o13', 'o21', 'o22', 'o31', 'o32', 'o33', 'o41', 'o42', 'o43', 'o51', 'o52', 'o53'])
 		out = vgg_outputs(o11, o12, o13, o21, o22, o31, o32, o33, o41, o42, o43, o51, o52, o53)
-		print("!"*10, out)
 
 		return out

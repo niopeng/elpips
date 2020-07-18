@@ -91,3 +91,10 @@ with tf.Session(config=session_config) as sess:
 
 	print("Distance ({}): {}".format(args.metric, distances_in_minibatch[0]))
 
+	distances_in_minibatch = sess.run(tf_evaluate_distance, feed_dict={
+		tf_image1: np.expand_dims(image1, axis=0),  # convert to NHWC tensors
+		tf_image2: np.expand_dims(image2, axis=0)
+	})
+
+	print("Distance1 ({}): {}".format(args.metric, distances_in_minibatch[0]))
+
