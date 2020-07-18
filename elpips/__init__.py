@@ -24,6 +24,9 @@ def elpips_vgg(batch_size=1, n=1, dtype=tf.float32):
 	config.batch_size = batch_size
 	config.average_over = n
 	config.dtype = dtype
+
+	# added
+	config.enable_dropout = False
 			
 	return config
 
