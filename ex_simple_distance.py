@@ -111,13 +111,17 @@ with tf.Session(config=session_config) as sess:
 		tf_image2: np.expand_dims(image2, axis=0)
 	})
 
-	print("L2 ({}): {}".format(args.metric, sum(l2)))
+	for i, l in enumerate(l2):
+		print("L2 out {} ({}): {}".format(i, args.metric, sum(l)))
+
+	print("@" * 10)
 
 	l2 = sess.run(vgg_loss, feed_dict={
 		tf_image1: np.expand_dims(image1, axis=0),  # convert to NHWC tensors
 		tf_image2: np.expand_dims(image2, axis=0)
 	})
 
-	print("L2 ({}): {}".format(args.metric, sum(l2)))
+	for i, l in enumerate(l2):
+		print("L2 out {} ({}): {}".format(i, args.metric, sum(l)))
 
 
