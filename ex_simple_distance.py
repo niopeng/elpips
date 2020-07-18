@@ -73,7 +73,8 @@ print("Creating computation graph.")
 tf_image1 = tf.placeholder(tf.float32)
 tf_image2 = tf.placeholder(tf.float32)
 tf_evaluate_distance = metric.forward(tf_image1, tf_image2)
-	
+net_loss = metric.network.forward(tf_image1, tf_image2)
+vgg_loss = metric.network.net.forward(tf_image1)
 	
 # Run.	
 print("Running graph.")
@@ -91,10 +92,32 @@ with tf.Session(config=session_config) as sess:
 
 	print("Distance ({}): {}".format(args.metric, distances_in_minibatch[0]))
 
-	distances_in_minibatch = sess.run(tf_evaluate_distance, feed_dict={
+	l1 = sess.run(net_loss, feed_dict={
 		tf_image1: np.expand_dims(image1, axis=0),  # convert to NHWC tensors
 		tf_image2: np.expand_dims(image2, axis=0)
 	})
 
-	print("Distance1 ({}): {}".format(args.metric, distances_in_minibatch[0]))
+	print("L1 ({}): {}".format(args.metric, l1))
+
+	l1 = sess.run(net_loss, feed_dict={
+		tf_image1: np.expand_dims(image1, axis=0),  # convert to NHWC tensors
+		tf_image2: np.expand_dims(image2, axis=0)
+	})
+
+	print("L1 ({}): {}".format(args.metric, l1))
+
+	l2 = sess.run(vgg_loss, feed_dict={
+		tf_image1: np.expand_dims(image1, axis=0),  # convert to NHWC tensors
+		tf_image2: np.expand_dims(image2, axis=0)
+	})
+
+	print("L2 ({}): {}".format(args.metric, l2))
+
+	l2 = sess.run(vgg_loss, feed_dict={
+		tf_image1: np.expand_dims(image1, axis=0),  # convert to NHWC tensors
+		tf_image2: np.expand_dims(image2, axis=0)
+	})
+
+	print("L2 ({}): {}".format(args.metric, l2))
+
 
