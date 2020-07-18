@@ -91,7 +91,6 @@ class PNetLin(object):
 						key: tf.get_variable(key, dtype=tf.float32, initializer=tf.zeros_like(value), trainable=True) for key, value in self.linear_weight_as_dict.items()
 					}
 		else:
-			print(a)
 			self.linear_weight_as_dict = {key: tf.constant(value, dtype=tf.float32) for key, value in self.linear_weight_as_dict.items()}
 		
 		self.shift = tf.constant([-.030, -.088, -.188],shape=(1,1,1,3),dtype=np_dtype(dtype))
