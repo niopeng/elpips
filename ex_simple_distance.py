@@ -112,7 +112,7 @@ with tf.Session(config=session_config) as sess:
 	})
 
 	for i, l in enumerate(l2):
-		print("L2 out {} ({}): {}".format(i, args.metric, sum(l)))
+		print("L2 out {} ({}): {}".format(i, args.metric, np.sum(l)))
 
 	print("@" * 10)
 
@@ -122,6 +122,6 @@ with tf.Session(config=session_config) as sess:
 	})
 
 	for i, l in enumerate(l2):
-		print("L2 out {} ({}): {}".format(i, args.metric, sum(l)))
+		print("L2 out {} ({}): {}".format(i, args.metric, np.sum(l)))
 
 
