@@ -321,7 +321,6 @@ class Metric:
 		if isinstance(self.config.average_over, numbers.Number) and self.config.average_over == 1:
 			# Skip tf.while for trivial single iterations.
 			_, loss_sum = body(0, tf.zeros([len(image_in), self.config.batch_size], dtype=self.config.dtype))
-			print(a)
 		else:
 			# Run multiple times for any other average_over count.
 			_, loss_sum = tf.while_loop(cond, body, (0, tf.zeros([len(image_in), self.config.batch_size], dtype=self.config.dtype)), back_prop=self.back_prop)
