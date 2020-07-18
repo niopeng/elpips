@@ -675,6 +675,7 @@ class vgg16_full_avg(Network):
 		
 		feature_path = os.path.join(DATA_DIR, "vgg16_pytorch_transposed_nonlinear_features.npy") 
 		self.features = np.load(feature_path, allow_pickle=True).item() if custom_net_weights is None else custom_net_weights
+		print("*"*10, np.sum(self.features['0.weight']))
 		
 		self.trainable = trainable
 		self.features = make_trainable(self.features, trainable, 'vgg_full_avg')
